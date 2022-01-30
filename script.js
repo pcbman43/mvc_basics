@@ -22,6 +22,22 @@ class View {
 		this.app.append(this.title, this.taskList)
 	}
 
+	displayTasks(tasks){
+		tasks.forEach(task => {
+			// create li
+			const li = this.setElement('li')
+			// set li id ccording to model data id
+			li.id = task.id
+			// text span
+			const span = this.setElement('span')
+			span.textContent = task.text
+			// append span to li
+			li.append(span)
+			// append created li to tsak list
+			this.taskList.append(li)
+		})
+	}
+
 	getElement(selector){
 		const element = document.querySelector(selector)
 		return element
@@ -40,6 +56,12 @@ class Controller {
 	constructor(model, view) {
 		this.model = model
 		this.view = view
+
+		this.displayTasks(this.model.tasks)
+	}
+
+	displayTasks = tasks => {
+		this.view.displayTasks(tasks)
 	}
 }
 
